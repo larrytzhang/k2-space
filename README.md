@@ -2,7 +2,7 @@
 
 **Turn paper aerospace procedures into structured JSON in seconds.**
 
-Live demo: _<vercel-url>_
+Live demo: <https://k2-space.vercel.app/>
 
 ---
 

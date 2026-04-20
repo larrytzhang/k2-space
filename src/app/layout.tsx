@@ -13,7 +13,7 @@ const inter = Inter({
  * wherever the demo URL is pasted (email, Slack, LinkedIn, etc.).
  */
 export const metadata: Metadata = {
-  metadataBase: new URL("https://k2-procedure-ai.vercel.app"),
+  metadataBase: new URL("https://k2-space.vercel.app"),
   title: "Procedure AI — structured aerospace procedures in seconds",
   description:
     "Upload a paper aerospace procedure (PDF, DOCX, or TXT) and get back a validated, machine-readable JSON structure — warnings, cautions, sign-offs, and pass/fail criteria all preserved.",
