@@ -32,14 +32,18 @@ export function useJobStream(
   const onCompleteRef = useRef(onComplete);
   const onErrorRef = useRef(onError);
 
-  onProgressRef.current = onProgress;
-  onCompleteRef.current = onComplete;
-  onErrorRef.current = onError;
+  // Keep the latest callback references in sync without mutating refs during
+  // render (React 19 forbids the latter).
+  useEffect(() => {
+    onProgressRef.current = onProgress;
+    onCompleteRef.current = onComplete;
+    onErrorRef.current = onError;
+  });
 
   useEffect(() => {
     if (!jobId) return;
 
-    const eventSource = new EventSource(`/api/stream/${jobId}`);
+    const eventSource = new EventSource(`/api/jobs/${jobId}/stream`);
     let timeoutId: ReturnType<typeof setTimeout>;
 
     /** Reset the inactivity timeout. */

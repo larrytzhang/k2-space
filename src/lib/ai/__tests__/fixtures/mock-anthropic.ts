@@ -20,7 +20,7 @@ interface MockResponse {
  * @param responses - Ordered list of responses the mock will return.
  * @returns A mock object with the same shape as the Anthropic client.
  */
-export function createMockClient(responses: MockResponse[]): any {
+export function createMockClient(responses: MockResponse[]): unknown {
   let callIndex = 0;
   return {
     messages: {

@@ -23,7 +23,7 @@ export function extractTablesFromHtml($: CheerioAPI): ParsedTable[] {
     const rows = $table.find("tr");
     if (rows.length === 0) return;
 
-    let headers: string[] = [];
+    const headers: string[] = [];
     const dataRows: string[][] = [];
     let headerRowIndex = -1;
 

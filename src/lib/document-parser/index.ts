@@ -73,7 +73,7 @@ export async function parseDocument(
   }
 
   // Step 4: Detect sections
-  let sections: ParsedSection[] = detectSections(cleanedText);
+  const sections: ParsedSection[] = detectSections(cleanedText);
 
   // If the parser returned tables (DOCX), distribute them to sections
   if ("tables" in rawResult && Array.isArray((rawResult as Record<string, unknown>).tables)) {

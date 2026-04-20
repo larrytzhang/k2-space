@@ -11,9 +11,7 @@ const mockDestroy = vi.fn();
 vi.mock("pdf-parse", () => {
   return {
     PDFParse: class MockPDFParse {
-      constructor(_options: unknown) {
-        // constructor is called with { data: Uint8Array }
-      }
+      // Constructor receives { data: Uint8Array }; we do not use it in tests.
       getText = mockGetText;
       destroy = mockDestroy;
     },
