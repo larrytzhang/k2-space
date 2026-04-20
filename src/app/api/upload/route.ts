@@ -1,10 +1,17 @@
 /**
  * POST /api/upload
  *
- * Accepts a multipart/form-data upload containing a single file,
- * validates it, creates a pipeline job, and fires off the
- * background processing pipeline. Returns the job ID immediately
- * so the client can subscribe to SSE progress updates.
+ * Accepts a multipart/form-data upload containing a single file, rate-limits
+ * the request, validates the file, creates a pipeline job, and fires off the
+ * background processing pipeline. Returns the job ID immediately so the
+ * client can subscribe to SSE progress updates at /api/jobs/[jobId]/stream.
+ *
+ * Security posture:
+ *   - Per-IP rate limit (10 req/hr) to protect the Anthropic key.
+ *   - Strict multipart/form-data content-type gate before parsing the body.
+ *   - Reject any form fields other than the expected "file" field.
+ *   - Defers file-content validation to lib/validation.
+ *   - Error responses do not include stack traces or internal paths.
  */
 
 import { NextResponse } from "next/server";
@@ -13,32 +20,88 @@ import { AppError } from "@/lib/errors";
 import { getJobStore } from "@/lib/pipeline/job-store";
 import { runPipeline } from "@/lib/pipeline/orchestrator";
 import type { Job } from "@/lib/pipeline/types";
+import {
+  clientIdentifier,
+  rateLimitHeaders,
+} from "@/lib/security/rate-limit";
+import { UPLOAD_POLICY, uploadLimiter } from "@/lib/security/policies";
+
+/** Upper bound on the total number of fields accepted in the form body. */
+const MAX_FORM_FIELDS = 1;
+
+/** The single field name this route expects. */
+const EXPECTED_FIELD = "file";
 
 /**
- * Handle file upload via POST.
- *
- * Expects a `multipart/form-data` body with a field named `file`.
- * On success, returns `{ jobId }` with HTTP 202 Accepted.
+ * Handle a file upload.
  *
  * @param request - The incoming HTTP request.
- * @returns A JSON response containing the job ID, or an error.
+ * @returns A JSON response with `{ jobId }` on success, or an error body.
  */
 export async function POST(request: Request): Promise<NextResponse> {
+  // 1. Rate-limit before touching the body. This prevents a client from
+  //    ballooning memory by sending a huge multipart payload we'll reject.
+  const identifier = clientIdentifier(request);
+  const limitResult = uploadLimiter.check({
+    bucket: "upload",
+    identifier,
+  });
+  const limitHeaders = rateLimitHeaders(limitResult, UPLOAD_POLICY.limit);
+
+  if (!limitResult.allowed) {
+    return NextResponse.json(
+      {
+        error:
+          "Rate limit exceeded. Samples still work — try one instead, or come back in a few minutes.",
+        code: "RATE_LIMITED",
+      },
+      { status: 429, headers: limitHeaders }
+    );
+  }
+
+  // 2. Enforce a multipart content-type gate. Skipping this allows attackers
+  //    to send non-multipart bodies and observe different error paths.
+  const contentType = request.headers.get("content-type") ?? "";
+  if (!contentType.toLowerCase().startsWith("multipart/form-data")) {
+    return NextResponse.json(
+      {
+        error: "Expected multipart/form-data body.",
+        code: "INVALID_CONTENT_TYPE",
+      },
+      { status: 400, headers: limitHeaders }
+    );
+  }
+
   try {
     const formData = await request.formData();
-    const file = formData.get("file");
 
-    if (!file || !(file instanceof File)) {
+    // 3. Reject bodies with unexpected fields. A legitimate client sends
+    //    exactly one "file" field; anything else is either a bug or abuse.
+    const keys = Array.from(new Set(Array.from(formData.keys())));
+    if (keys.length > MAX_FORM_FIELDS || keys[0] !== EXPECTED_FIELD) {
       return NextResponse.json(
-        { error: "Missing required field: file" },
-        { status: 400 }
+        {
+          error: `Only a single "${EXPECTED_FIELD}" field is allowed.`,
+          code: "INVALID_FORM_FIELDS",
+        },
+        { status: 400, headers: limitHeaders }
       );
     }
 
-    // Validate file constraints (empty, size, MIME type)
+    const file = formData.get(EXPECTED_FIELD);
+    if (!file || !(file instanceof File)) {
+      return NextResponse.json(
+        { error: `Missing required field: ${EXPECTED_FIELD}` },
+        { status: 400, headers: limitHeaders }
+      );
+    }
+
+    // 4. Size, MIME, and emptiness checks live in lib/validation so that the
+    //    rules stay in one place and can be tested in isolation.
     validateUploadedFile(file);
 
-    // Create the job record
+    // 5. Create the job record. The ID is a crypto-random UUID so an attacker
+    //    cannot guess job IDs and read other users' results.
     const jobId = crypto.randomUUID();
     const now = new Date().toISOString();
     const job: Job = {
@@ -51,28 +114,33 @@ export async function POST(request: Request): Promise<NextResponse> {
       error: null,
     };
 
-    const store = getJobStore();
-    store.set(job);
+    getJobStore().set(job);
 
-    // Read the file into a Buffer for the pipeline
+    // Read the file into a Buffer for the pipeline.
     const arrayBuffer = await file.arrayBuffer();
     const buffer = Buffer.from(arrayBuffer);
 
-    // Fire-and-forget: start the pipeline without awaiting it.
-    // The orchestrator never throws — errors are recorded on the job.
+    // Fire-and-forget: the orchestrator never throws — errors are recorded
+    // on the job record and surfaced via the SSE stream.
     runPipeline(jobId, buffer, file.name, file.type);
 
-    return NextResponse.json({ jobId }, { status: 202 });
+    return NextResponse.json(
+      { jobId },
+      { status: 202, headers: limitHeaders }
+    );
   } catch (err: unknown) {
     if (err instanceof AppError) {
       return NextResponse.json(
         { error: err.message, code: err.code },
-        { status: err.httpStatus }
+        { status: err.httpStatus, headers: limitHeaders }
       );
     }
 
-    const message =
-      err instanceof Error ? err.message : "Internal server error";
-    return NextResponse.json({ error: message }, { status: 500 });
+    // Do not leak internal error details to the client. Log server-side if
+    // needed, but the response is deliberately generic.
+    return NextResponse.json(
+      { error: "Upload failed. Please try again.", code: "INTERNAL_ERROR" },
+      { status: 500, headers: limitHeaders }
+    );
   }
 }
