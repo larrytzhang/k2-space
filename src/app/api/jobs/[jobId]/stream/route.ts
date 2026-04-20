@@ -32,11 +32,13 @@ const STATUS_DISPLAY: Record<
   Exclude<JobStatus, "completed" | "failed">,
   { stage: string; progress: number }
 > = {
-  pending: { stage: "Queued for processing", progress: 5 },
-  parsing: { stage: "Extracting text from document", progress: 30 },
+  // Start pending above the 10% threshold so the ProcessingIndicator step
+  // list renders its first stage as "active" from the very first tick.
+  pending: { stage: "Queued for processing", progress: 15 },
+  parsing: { stage: "Extracting text from document", progress: 40 },
   structuring: {
     stage: "Classifying sections, warnings, and sign-offs with Claude",
-    progress: 65,
+    progress: 70,
   },
 };
 

@@ -94,7 +94,8 @@ async function callWithRetry(
   for (let attempt = 0; attempt <= maxRetries; attempt++) {
     try {
       const response = await client.messages.create({
-        model: "claude-sonnet-4-20250514",
+        // Claude Sonnet 4.6 — the current Sonnet as of April 2026.
+        model: "claude-sonnet-4-6",
         max_tokens: maxTokens,
         system: SYSTEM_PROMPT,
         messages: [{ role: "user", content: userPrompt }],
