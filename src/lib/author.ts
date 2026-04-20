@@ -11,7 +11,7 @@ export const AUTHOR = {
   school: "Harvard",
   email: "larryzhang225@gmail.com",
   linkedin: "https://www.linkedin.com/in/larryzhang225/",
-  github: "https://github.com/larryzhang225/k2-procedure-ai",
+  github: "https://github.com/larrytzhang/k2-space",
   projectName: "AI Procedure Generator",
   projectTagline:
     "Turn paper aerospace procedures into structured JSON in seconds.",

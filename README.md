@@ -61,8 +61,8 @@ Upload (PDF/DOCX/TXT)
 ## Run it locally
 
 ```bash
-git clone https://github.com/larryzhang225/k2-procedure-ai.git
-cd k2-procedure-ai
+git clone https://github.com/larrytzhang/k2-space.git
+cd k2-space
 npm install
 cp .env.example .env
 # paste your Anthropic API key into .env
