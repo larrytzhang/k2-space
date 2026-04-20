@@ -1,0 +1,182 @@
+{
+  "id": "sample-solar-array-deployment",
+  "title": "Solar Array Deployment Verification Test",
+  "documentNumber": "SAT-TEST-2041",
+  "revision": "C",
+  "effectiveDate": "2026-02-14",
+  "purpose": "This procedure verifies the nominal deployment kinematics and end-of-travel latching of the primary solar array wing assembly prior to spacecraft integration.",
+  "scope": "Applies to all flight-configuration solar array wings (P/N 40127-FLT). Does not apply to qualification or engineering-model hardware.",
+  "roles": [
+    { "abbreviation": "TC", "fullName": "Test Conductor" },
+    { "abbreviation": "QA", "fullName": "Quality Assurance" },
+    { "abbreviation": "ME", "fullName": "Mechanical Engineer" },
+    { "abbreviation": "SO", "fullName": "Safety Officer" }
+  ],
+  "equipment": [
+    { "name": "Torque Wrench", "quantity": "1", "specification": "0–5 N·m, calibrated" },
+    { "name": "Deployment Fixture SAF-400", "quantity": "1" },
+    { "name": "High-speed camera", "quantity": "2", "specification": "240 fps minimum" },
+    { "name": "Nitrogen purge cart", "quantity": "1", "specification": "regulated 2–5 psi" },
+    { "name": "ESD-safe gloves", "quantity": "as required" }
+  ],
+  "sections": [
+    {
+      "id": "sec-1",
+      "title": "Pre-Deployment Checks",
+      "steps": [
+        {
+          "id": "s-1-1",
+          "number": "1.1",
+          "instruction": "Verify that the deployment fixture SAF-400 is rigidly bolted to the test table. Torque mounting bolts to 4.5 N·m.",
+          "contentBlocks": [
+            { "type": "warning", "text": "Array panels store significant strain energy in the stowed configuration. Release of restraint cables without proper fixture engagement can cause uncontrolled deployment and serious injury. Confirm Safety Officer presence before proceeding." },
+            { "type": "field_input", "label": "Torque reading", "inputType": "number", "unit": "N·m" },
+            { "type": "sign_off", "role": "TC", "label": "TC signature" }
+          ],
+          "substeps": []
+        },
+        {
+          "id": "s-1-2",
+          "number": "1.2",
+          "instruction": "Do not energize the release mechanism until nitrogen purge is active.",
+          "contentBlocks": [
+            { "type": "caution", "text": "Do not energize the release mechanism until nitrogen purge is active. Electrostatic discharge may damage the pyrotechnic initiator." }
+          ],
+          "substeps": []
+        },
+        {
+          "id": "s-1-3",
+          "number": "1.3",
+          "instruction": "Enable nitrogen purge at 3.0 ± 0.5 psi. Verify flow on cart flowmeter.",
+          "contentBlocks": [
+            { "type": "field_input", "label": "Observed purge pressure", "inputType": "number", "unit": "psi" },
+            { "type": "pass_fail", "criteria": "Nitrogen purge stable at 3.0 ± 0.5 psi with flowmeter indication" },
+            { "type": "sign_off", "role": "ME", "label": "ME signature" }
+          ],
+          "substeps": []
+        },
+        {
+          "id": "s-1-4",
+          "number": "1.4",
+          "instruction": "Trigger high-speed cameras at T-5 seconds.",
+          "contentBlocks": [
+            { "type": "note", "text": "The high-speed cameras must be triggered at T-5 seconds to ensure pre-trigger data capture." }
+          ],
+          "substeps": []
+        }
+      ]
+    },
+    {
+      "id": "sec-2",
+      "title": "Release and Deployment",
+      "steps": [
+        {
+          "id": "s-2-1",
+          "number": "2.1",
+          "instruction": "Arm release mechanism. Confirm arming indicator is GREEN.",
+          "contentBlocks": [
+            { "type": "field_input", "label": "Indicator state (GREEN or RED)", "inputType": "text" },
+            { "type": "sign_off", "role": "QA", "label": "QA signature" }
+          ],
+          "substeps": []
+        },
+        {
+          "id": "s-2-2",
+          "number": "2.2",
+          "instruction": "Initiate T-10 second countdown. Trigger high-speed cameras at T-5.",
+          "contentBlocks": [],
+          "substeps": []
+        },
+        {
+          "id": "s-2-3",
+          "number": "2.3",
+          "instruction": "Issue release command. Observe deployment.",
+          "contentBlocks": [],
+          "substeps": [
+            {
+              "id": "s-2-3-1",
+              "number": "2.3.1",
+              "instruction": "Maintain personnel exclusion zone of 3 meters during deployment.",
+              "contentBlocks": [
+                { "type": "warning", "text": "Maintain personnel exclusion zone of 3 meters during deployment. No personnel within deployment envelope." }
+              ],
+              "substeps": []
+            },
+            {
+              "id": "s-2-3-2",
+              "number": "2.3.2",
+              "instruction": "Record time to full deployment.",
+              "contentBlocks": [
+                { "type": "field_input", "label": "Time to full deployment", "inputType": "number", "unit": "s" },
+                { "type": "pass_fail", "criteria": "Deployment time within 4.5–6.0 s" }
+              ],
+              "substeps": []
+            },
+            {
+              "id": "s-2-3-3",
+              "number": "2.3.3",
+              "instruction": "Verify all four latch indicators show LATCHED.",
+              "contentBlocks": [
+                { "type": "field_input", "label": "Latch 1 state", "inputType": "checkbox" },
+                { "type": "field_input", "label": "Latch 2 state", "inputType": "checkbox" },
+                { "type": "field_input", "label": "Latch 3 state", "inputType": "checkbox" },
+                { "type": "field_input", "label": "Latch 4 state", "inputType": "checkbox" }
+              ],
+              "substeps": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sec-3",
+      "title": "Post-Deployment Inspection",
+      "steps": [
+        {
+          "id": "s-3-1",
+          "number": "3.1",
+          "instruction": "Visually inspect hinge lines for binding, scoring, or debris.",
+          "contentBlocks": [
+            { "type": "pass_fail", "criteria": "No binding, scoring, or debris observed on any hinge line" },
+            { "type": "sign_off", "role": "ME", "label": "ME signature" }
+          ],
+          "substeps": []
+        },
+        {
+          "id": "s-3-2",
+          "number": "3.2",
+          "instruction": "Measure final tip displacement from reference datum.",
+          "contentBlocks": [
+            { "type": "field_input", "label": "Tip displacement measurement", "inputType": "number", "unit": "mm" },
+            { "type": "pass_fail", "criteria": "Tip displacement within 4020 ± 15 mm" }
+          ],
+          "substeps": []
+        },
+        {
+          "id": "s-3-3",
+          "number": "3.3",
+          "instruction": "Disable nitrogen purge.",
+          "contentBlocks": [],
+          "substeps": []
+        },
+        {
+          "id": "s-3-4",
+          "number": "3.4",
+          "instruction": "Record test complete.",
+          "contentBlocks": [
+            { "type": "sign_off", "role": "TC", "label": "TC signature" },
+            { "type": "sign_off", "role": "QA", "label": "QA signature" },
+            { "type": "field_input", "label": "Date", "inputType": "text" }
+          ],
+          "substeps": []
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "domain": "test",
+    "totalSteps": 14,
+    "totalWarnings": 2,
+    "estimatedDuration": "90 minutes"
+  }
+}

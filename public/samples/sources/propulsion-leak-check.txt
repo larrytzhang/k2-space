@@ -1,0 +1,102 @@
+PROCEDURE: PROPULSION FEED SYSTEM PRESSURE DECAY LEAK CHECK
+Document No: PROP-INSP-1108
+Revision: B
+Effective Date: 2026-01-30
+
+PURPOSE
+Verify that the hydrazine feed system is within allowable leakage limits prior to
+propellant loading.
+
+SCOPE
+Applies to the monopropellant feed manifold P/N 30918-FLT between the tank isolation
+valve and the thruster manifold cluster.
+
+ROLES
+Test Conductor (TC)
+Propulsion Engineer (PE)
+Safety Officer (SO)
+Quality Assurance (QA)
+
+EQUIPMENT
+Helium supply bottle, grade 5.0, regulated (Qty: 1)
+Digital pressure transducer, 0–3000 psig, ± 0.1% FS (Qty: 1)
+Soap solution, propellant-compatible (Qty: 1 bottle)
+Calibrated stopwatch (Qty: 1)
+Thermocouple, Type T, surface mount (Qty: 1)
+
+1. SETUP
+
+  WARNING: Hydrazine residue may be present. Personnel shall wear Level B PPE including
+  SCBA until chemical clearance is signed off by the Safety Officer.
+
+  1.1 Confirm system is isolated and vented to atmosphere.
+      System pressure: _____ psig (acceptance: < 1 psig)
+      Pass / Fail: _____
+      PE signature: _____________
+
+  1.2 Install calibrated pressure transducer at test port TP-3.
+      Transducer S/N: _____________
+      Calibration due date: _____________
+
+  1.3 CAUTION: Do not exceed regulator outlet of 350 psig. Overpressure will damage
+      the downstream regulator diaphragm.
+
+2. PRESSURIZATION
+
+  2.1 Slowly open helium supply valve. Increase pressure at < 50 psi/min.
+
+  2.2 Stabilize system at 300 ± 5 psig.
+      Observed pressure: _____ psig
+      System temperature: _____ °C
+
+  2.3 Close isolation valve ISO-2. System is now sealed.
+
+  2.4 NOTE: Allow 10 minutes for thermal equilibrium before beginning decay window.
+
+3. DECAY MEASUREMENT
+
+  3.1 Record initial conditions at t = 0.
+      P_initial: _____ psig
+      T_initial: _____ °C
+      Timestamp: _____________
+
+  3.2 Wait 30 minutes with system isolated.
+
+  3.3 Record final conditions at t = 30 min.
+      P_final: _____ psig
+      T_final: _____ °C
+
+  3.4 Compute temperature-corrected pressure decay.
+      ΔP corrected: _____ psi
+      Acceptance: ΔP ≤ 0.5 psi over 30 minutes
+      Pass / Fail: _____
+
+4. EXTERNAL LEAK SURVEY
+
+  4.1 While system is pressurized, apply soap solution to all mechanical joints.
+
+  4.2 WARNING: Do not apply soap solution to electrical connectors or heater leads.
+      Ingress may cause short circuits upon reenergization.
+
+  4.3 Inspect each joint for 15 seconds minimum. Record any bubbling.
+      Joint J-1 observation: ___ No leak ___ Leak observed
+      Joint J-2 observation: ___ No leak ___ Leak observed
+      Joint J-3 observation: ___ No leak ___ Leak observed
+      Joint J-4 observation: ___ No leak ___ Leak observed
+
+5. SHUTDOWN
+
+  5.1 Vent system through vent valve VV-1 at < 50 psi/min.
+
+  5.2 Confirm system pressure returned to atmospheric.
+      Final pressure: _____ psig
+
+  5.3 Remove test equipment and cap test port TP-3.
+
+  5.4 Sign-offs:
+      TC: _____________
+      PE: _____________
+      QA: _____________
+      SO: _____________
+
+ESTIMATED DURATION: 75 minutes

@@ -1,0 +1,225 @@
+{
+  "id": "sample-propulsion-leak-check",
+  "title": "Propulsion Feed System Pressure Decay Leak Check",
+  "documentNumber": "PROP-INSP-1108",
+  "revision": "B",
+  "effectiveDate": "2026-01-30",
+  "purpose": "Verify that the hydrazine feed system is within allowable leakage limits prior to propellant loading.",
+  "scope": "Applies to the monopropellant feed manifold P/N 30918-FLT between the tank isolation valve and the thruster manifold cluster.",
+  "roles": [
+    { "abbreviation": "TC", "fullName": "Test Conductor" },
+    { "abbreviation": "PE", "fullName": "Propulsion Engineer" },
+    { "abbreviation": "SO", "fullName": "Safety Officer" },
+    { "abbreviation": "QA", "fullName": "Quality Assurance" }
+  ],
+  "equipment": [
+    { "name": "Helium supply bottle", "quantity": "1", "specification": "grade 5.0, regulated" },
+    { "name": "Digital pressure transducer", "quantity": "1", "specification": "0–3000 psig, ± 0.1% FS" },
+    { "name": "Soap solution", "quantity": "1 bottle", "specification": "propellant-compatible" },
+    { "name": "Calibrated stopwatch", "quantity": "1" },
+    { "name": "Thermocouple", "quantity": "1", "specification": "Type T, surface mount" }
+  ],
+  "sections": [
+    {
+      "id": "sec-1",
+      "title": "Setup",
+      "steps": [
+        {
+          "id": "s-1-1",
+          "number": "1.1",
+          "instruction": "Confirm system is isolated and vented to atmosphere.",
+          "contentBlocks": [
+            { "type": "warning", "text": "Hydrazine residue may be present. Personnel shall wear Level B PPE including SCBA until chemical clearance is signed off by the Safety Officer." },
+            { "type": "field_input", "label": "System pressure", "inputType": "number", "unit": "psig" },
+            { "type": "pass_fail", "criteria": "System pressure less than 1 psig" },
+            { "type": "sign_off", "role": "PE", "label": "PE signature" }
+          ],
+          "substeps": []
+        },
+        {
+          "id": "s-1-2",
+          "number": "1.2",
+          "instruction": "Install calibrated pressure transducer at test port TP-3.",
+          "contentBlocks": [
+            { "type": "field_input", "label": "Transducer S/N", "inputType": "text" },
+            { "type": "field_input", "label": "Calibration due date", "inputType": "text" }
+          ],
+          "substeps": []
+        },
+        {
+          "id": "s-1-3",
+          "number": "1.3",
+          "instruction": "Do not exceed regulator outlet of 350 psig.",
+          "contentBlocks": [
+            { "type": "caution", "text": "Do not exceed regulator outlet of 350 psig. Overpressure will damage the downstream regulator diaphragm." }
+          ],
+          "substeps": []
+        }
+      ]
+    },
+    {
+      "id": "sec-2",
+      "title": "Pressurization",
+      "steps": [
+        {
+          "id": "s-2-1",
+          "number": "2.1",
+          "instruction": "Slowly open helium supply valve. Increase pressure at less than 50 psi/min.",
+          "contentBlocks": [],
+          "substeps": []
+        },
+        {
+          "id": "s-2-2",
+          "number": "2.2",
+          "instruction": "Stabilize system at 300 ± 5 psig.",
+          "contentBlocks": [
+            { "type": "field_input", "label": "Observed pressure", "inputType": "number", "unit": "psig" },
+            { "type": "field_input", "label": "System temperature", "inputType": "number", "unit": "°C" }
+          ],
+          "substeps": []
+        },
+        {
+          "id": "s-2-3",
+          "number": "2.3",
+          "instruction": "Close isolation valve ISO-2. System is now sealed.",
+          "contentBlocks": [],
+          "substeps": []
+        },
+        {
+          "id": "s-2-4",
+          "number": "2.4",
+          "instruction": "Allow 10 minutes for thermal equilibrium before beginning decay window.",
+          "contentBlocks": [
+            { "type": "note", "text": "Allow 10 minutes for thermal equilibrium before beginning decay window." }
+          ],
+          "substeps": []
+        }
+      ]
+    },
+    {
+      "id": "sec-3",
+      "title": "Decay Measurement",
+      "steps": [
+        {
+          "id": "s-3-1",
+          "number": "3.1",
+          "instruction": "Record initial conditions at t = 0.",
+          "contentBlocks": [
+            { "type": "field_input", "label": "P_initial", "inputType": "number", "unit": "psig" },
+            { "type": "field_input", "label": "T_initial", "inputType": "number", "unit": "°C" },
+            { "type": "field_input", "label": "Timestamp", "inputType": "text" }
+          ],
+          "substeps": []
+        },
+        {
+          "id": "s-3-2",
+          "number": "3.2",
+          "instruction": "Wait 30 minutes with system isolated.",
+          "contentBlocks": [],
+          "substeps": []
+        },
+        {
+          "id": "s-3-3",
+          "number": "3.3",
+          "instruction": "Record final conditions at t = 30 min.",
+          "contentBlocks": [
+            { "type": "field_input", "label": "P_final", "inputType": "number", "unit": "psig" },
+            { "type": "field_input", "label": "T_final", "inputType": "number", "unit": "°C" }
+          ],
+          "substeps": []
+        },
+        {
+          "id": "s-3-4",
+          "number": "3.4",
+          "instruction": "Compute temperature-corrected pressure decay.",
+          "contentBlocks": [
+            { "type": "field_input", "label": "ΔP corrected", "inputType": "number", "unit": "psi" },
+            { "type": "pass_fail", "criteria": "ΔP ≤ 0.5 psi over 30 minutes" }
+          ],
+          "substeps": []
+        }
+      ]
+    },
+    {
+      "id": "sec-4",
+      "title": "External Leak Survey",
+      "steps": [
+        {
+          "id": "s-4-1",
+          "number": "4.1",
+          "instruction": "While system is pressurized, apply soap solution to all mechanical joints.",
+          "contentBlocks": [],
+          "substeps": []
+        },
+        {
+          "id": "s-4-2",
+          "number": "4.2",
+          "instruction": "Do not apply soap solution to electrical connectors or heater leads.",
+          "contentBlocks": [
+            { "type": "warning", "text": "Do not apply soap solution to electrical connectors or heater leads. Ingress may cause short circuits upon reenergization." }
+          ],
+          "substeps": []
+        },
+        {
+          "id": "s-4-3",
+          "number": "4.3",
+          "instruction": "Inspect each joint for 15 seconds minimum. Record any bubbling.",
+          "contentBlocks": [
+            { "type": "field_input", "label": "Joint J-1 leak observed", "inputType": "checkbox" },
+            { "type": "field_input", "label": "Joint J-2 leak observed", "inputType": "checkbox" },
+            { "type": "field_input", "label": "Joint J-3 leak observed", "inputType": "checkbox" },
+            { "type": "field_input", "label": "Joint J-4 leak observed", "inputType": "checkbox" }
+          ],
+          "substeps": []
+        }
+      ]
+    },
+    {
+      "id": "sec-5",
+      "title": "Shutdown",
+      "steps": [
+        {
+          "id": "s-5-1",
+          "number": "5.1",
+          "instruction": "Vent system through vent valve VV-1 at less than 50 psi/min.",
+          "contentBlocks": [],
+          "substeps": []
+        },
+        {
+          "id": "s-5-2",
+          "number": "5.2",
+          "instruction": "Confirm system pressure returned to atmospheric.",
+          "contentBlocks": [
+            { "type": "field_input", "label": "Final pressure", "inputType": "number", "unit": "psig" }
+          ],
+          "substeps": []
+        },
+        {
+          "id": "s-5-3",
+          "number": "5.3",
+          "instruction": "Remove test equipment and cap test port TP-3.",
+          "contentBlocks": [],
+          "substeps": []
+        },
+        {
+          "id": "s-5-4",
+          "number": "5.4",
+          "instruction": "Collect required sign-offs.",
+          "contentBlocks": [
+            { "type": "sign_off", "role": "TC", "label": "TC signature" },
+            { "type": "sign_off", "role": "PE", "label": "PE signature" },
+            { "type": "sign_off", "role": "QA", "label": "QA signature" },
+            { "type": "sign_off", "role": "SO", "label": "SO signature" }
+          ],
+          "substeps": []
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "domain": "inspection",
+    "totalSteps": 17,
+    "totalWarnings": 2,
+    "estimatedDuration": "75 minutes"
+  }
+}

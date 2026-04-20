@@ -1,0 +1,88 @@
+PROCEDURE: SOLAR ARRAY DEPLOYMENT VERIFICATION TEST
+Document No: SAT-TEST-2041
+Revision: C
+Effective Date: 2026-02-14
+
+PURPOSE
+This procedure verifies the nominal deployment kinematics and end-of-travel latching of
+the primary solar array wing assembly prior to spacecraft integration.
+
+SCOPE
+Applies to all flight-configuration solar array wings (P/N 40127-FLT). Does not apply to
+qualification or engineering-model hardware.
+
+ROLES
+Test Conductor (TC)
+Quality Assurance (QA)
+Mechanical Engineer (ME)
+Safety Officer (SO)
+
+EQUIPMENT
+Torque Wrench, 0–5 N·m, calibrated (Qty: 1)
+Deployment Fixture SAF-400 (Qty: 1)
+High-speed camera, 240 fps minimum (Qty: 2)
+Nitrogen purge cart, regulated 2–5 psi (Qty: 1)
+ESD-safe gloves (Qty: as required)
+
+1. PRE-DEPLOYMENT CHECKS
+
+  WARNING: Array panels store significant strain energy in the stowed configuration.
+  Release of restraint cables without proper fixture engagement can cause uncontrolled
+  deployment and serious injury. Confirm Safety Officer presence before proceeding.
+
+  1.1 Verify that the deployment fixture SAF-400 is rigidly bolted to the test table.
+      Torque mounting bolts to 4.5 N·m.
+      Torque reading: _____ N·m
+      TC signature: _____________
+
+  1.2 CAUTION: Do not energize the release mechanism until nitrogen purge is active.
+      Electrostatic discharge may damage the pyrotechnic initiator.
+
+  1.3 Enable nitrogen purge at 3.0 ± 0.5 psi. Verify flow on cart flowmeter.
+      Observed purge pressure: _____ psi
+      Pass / Fail: _____
+      ME signature: _____________
+
+  1.4 NOTE: The high-speed cameras must be triggered at T-5 seconds to ensure pre-trigger
+      data capture.
+
+2. RELEASE AND DEPLOYMENT
+
+  2.1 Arm release mechanism. Confirm arming indicator is GREEN.
+      Indicator state: ___ GREEN ___ RED
+      QA signature: _____________
+
+  2.2 Initiate T-10 second countdown. Trigger high-speed cameras at T-5.
+
+  2.3 Issue release command. Observe deployment.
+
+    2.3.1 WARNING: Maintain personnel exclusion zone of 3 meters during deployment.
+          No personnel within deployment envelope.
+
+    2.3.2 Time to full deployment: _____ seconds (acceptance: 4.5–6.0 s)
+          Pass / Fail: _____
+
+    2.3.3 Verify all four latch indicators show LATCHED.
+          Latch 1: ___ LATCHED ___ NOT LATCHED
+          Latch 2: ___ LATCHED ___ NOT LATCHED
+          Latch 3: ___ LATCHED ___ NOT LATCHED
+          Latch 4: ___ LATCHED ___ NOT LATCHED
+
+3. POST-DEPLOYMENT INSPECTION
+
+  3.1 Visually inspect hinge lines for binding, scoring, or debris.
+      Pass / Fail: _____
+      ME signature: _____________
+
+  3.2 Measure final tip displacement from reference datum.
+      Measurement: _____ mm (acceptance: 4020 ± 15 mm)
+      Pass / Fail: _____
+
+  3.3 Disable nitrogen purge.
+
+  3.4 Record test complete.
+      TC signature: _____________
+      QA signature: _____________
+      Date: _____________
+
+ESTIMATED DURATION: 90 minutes

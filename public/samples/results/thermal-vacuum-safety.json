@@ -1,0 +1,275 @@
+{
+  "id": "sample-thermal-vacuum-safety",
+  "title": "Thermal Vacuum Chamber Entry and Safety Lockout",
+  "documentNumber": "SAFE-TVAC-0042",
+  "revision": "D",
+  "effectiveDate": "2026-03-03",
+  "purpose": "Establish the safety interlock, lockout, and personnel entry sequence for the 6-meter thermal vacuum chamber TVAC-A before any personnel access the chamber interior.",
+  "scope": "Applies to all personnel accessing the interior of TVAC-A at any time, including during test, maintenance, and emergency response.",
+  "roles": [
+    { "abbreviation": "SO", "fullName": "Safety Officer" },
+    { "abbreviation": "CO", "fullName": "Chamber Operator" },
+    { "abbreviation": "TC", "fullName": "Test Conductor" },
+    { "abbreviation": "AE", "fullName": "Authorized Entrant" }
+  ],
+  "equipment": [
+    { "name": "Oxygen meter", "quantity": "2", "specification": "portable, calibrated" },
+    { "name": "Lockout/Tagout kit", "quantity": "1" },
+    { "name": "Intrinsically safe flashlight", "quantity": "1 per entrant" },
+    { "name": "Two-way radio", "quantity": "1 per entrant" },
+    { "name": "Harness and lanyard", "quantity": "1 per entrant", "specification": "fall arrest rated" }
+  ],
+  "sections": [
+    {
+      "id": "sec-1",
+      "title": "Chamber Depressurization Verification",
+      "steps": [
+        {
+          "id": "s-1-1",
+          "number": "1.1",
+          "instruction": "Confirm chamber pressure equalization valve is OPEN.",
+          "contentBlocks": [
+            { "type": "warning", "text": "Attempting to open the chamber door against residual vacuum can cause the door to swing violently, resulting in severe crushing injury or death. Never bypass the pressure equalization interlock." }
+          ],
+          "substeps": []
+        },
+        {
+          "id": "s-1-2",
+          "number": "1.2",
+          "instruction": "Verify chamber pressure reading.",
+          "contentBlocks": [
+            { "type": "field_input", "label": "Chamber pressure", "inputType": "number", "unit": "Torr" },
+            { "type": "pass_fail", "criteria": "Chamber pressure ≥ 750 Torr before door unlock" },
+            { "type": "sign_off", "role": "CO", "label": "CO signature" }
+          ],
+          "substeps": []
+        },
+        {
+          "id": "s-1-3",
+          "number": "1.3",
+          "instruction": "If pressure reading disagrees with ambient by more than 5 Torr, STOP and contact SO.",
+          "contentBlocks": [
+            { "type": "warning", "text": "If pressure reading disagrees with ambient by more than 5 Torr, STOP. Do not attempt entry. Contact SO immediately." }
+          ],
+          "substeps": []
+        }
+      ]
+    },
+    {
+      "id": "sec-2",
+      "title": "Thermal Safing",
+      "steps": [
+        {
+          "id": "s-2-1",
+          "number": "2.1",
+          "instruction": "Verify all shroud zones are at SAFE temperature (between 10 °C and 35 °C).",
+          "contentBlocks": [
+            { "type": "field_input", "label": "Zone A temperature", "inputType": "number", "unit": "°C" },
+            { "type": "field_input", "label": "Zone B temperature", "inputType": "number", "unit": "°C" },
+            { "type": "field_input", "label": "Zone C temperature", "inputType": "number", "unit": "°C" },
+            { "type": "field_input", "label": "Zone D temperature", "inputType": "number", "unit": "°C" },
+            { "type": "pass_fail", "criteria": "All four shroud zones within 10–35 °C" }
+          ],
+          "substeps": []
+        },
+        {
+          "id": "s-2-2",
+          "number": "2.2",
+          "instruction": "Cold surfaces may condense atmospheric moisture when the chamber is opened.",
+          "contentBlocks": [
+            { "type": "caution", "text": "Cold surfaces may condense atmospheric moisture when the chamber is opened, creating slip hazards and potential damage to flight hardware." }
+          ],
+          "substeps": []
+        },
+        {
+          "id": "s-2-3",
+          "number": "2.3",
+          "instruction": "If any zone is outside SAFE range, initiate warm-up and wait until criteria met.",
+          "contentBlocks": [],
+          "substeps": []
+        }
+      ]
+    },
+    {
+      "id": "sec-3",
+      "title": "Electrical Lockout",
+      "steps": [
+        {
+          "id": "s-3-1",
+          "number": "3.1",
+          "instruction": "De-energize all chamber electrical panels at the master disconnect.",
+          "contentBlocks": [
+            { "type": "warning", "text": "High-voltage feed-throughs remain energized until verified disconnected. Contact with live feed-throughs may result in fatal electrical shock." }
+          ],
+          "substeps": []
+        },
+        {
+          "id": "s-3-2",
+          "number": "3.2",
+          "instruction": "Apply personal locks to each panel. Each authorized entrant applies their own lock.",
+          "contentBlocks": [],
+          "substeps": [
+            {
+              "id": "s-3-2-1",
+              "number": "3.2.1",
+              "instruction": "Panel PNL-1 locked.",
+              "contentBlocks": [
+                { "type": "field_input", "label": "PNL-1 locked by", "inputType": "text" }
+              ],
+              "substeps": []
+            },
+            {
+              "id": "s-3-2-2",
+              "number": "3.2.2",
+              "instruction": "Panel PNL-2 locked.",
+              "contentBlocks": [
+                { "type": "field_input", "label": "PNL-2 locked by", "inputType": "text" }
+              ],
+              "substeps": []
+            },
+            {
+              "id": "s-3-2-3",
+              "number": "3.2.3",
+              "instruction": "Panel PNL-3 locked.",
+              "contentBlocks": [
+                { "type": "field_input", "label": "PNL-3 locked by", "inputType": "text" }
+              ],
+              "substeps": []
+            }
+          ]
+        },
+        {
+          "id": "s-3-3",
+          "number": "3.3",
+          "instruction": "Attempt to energize panels via control interface. Confirm NO activation.",
+          "contentBlocks": [
+            { "type": "field_input", "label": "Control attempt blocked", "inputType": "checkbox" }
+          ],
+          "substeps": []
+        },
+        {
+          "id": "s-3-4",
+          "number": "3.4",
+          "instruction": "If control attempt shows activation, lockout has failed. Do not enter. Escalate to SO.",
+          "contentBlocks": [
+            { "type": "note", "text": "If control attempt shows activation, lockout has failed. Do not enter. Escalate to SO." }
+          ],
+          "substeps": []
+        }
+      ]
+    },
+    {
+      "id": "sec-4",
+      "title": "Atmospheric Verification",
+      "steps": [
+        {
+          "id": "s-4-1",
+          "number": "4.1",
+          "instruction": "Insert oxygen meter through inspection port.",
+          "contentBlocks": [],
+          "substeps": []
+        },
+        {
+          "id": "s-4-2",
+          "number": "4.2",
+          "instruction": "Confirm oxygen concentration is within safe range.",
+          "contentBlocks": [
+            { "type": "field_input", "label": "O2 reading", "inputType": "number", "unit": "%" },
+            { "type": "pass_fail", "criteria": "Oxygen concentration within 19.5–23.5%" },
+            { "type": "sign_off", "role": "SO", "label": "SO signature" }
+          ],
+          "substeps": []
+        },
+        {
+          "id": "s-4-3",
+          "number": "4.3",
+          "instruction": "If O2 outside acceptance, do NOT enter. Ventilate and re-test.",
+          "contentBlocks": [
+            { "type": "warning", "text": "Oxygen concentration outside the acceptance range indicates residual inert gas. Do NOT enter chamber. Ventilate and re-test." }
+          ],
+          "substeps": []
+        }
+      ]
+    },
+    {
+      "id": "sec-5",
+      "title": "Entry Authorization",
+      "steps": [
+        {
+          "id": "s-5-1",
+          "number": "5.1",
+          "instruction": "Confirm radio communication check with external monitor.",
+          "contentBlocks": [
+            { "type": "field_input", "label": "Radio check good", "inputType": "checkbox" }
+          ],
+          "substeps": []
+        },
+        {
+          "id": "s-5-2",
+          "number": "5.2",
+          "instruction": "Don fall-arrest harness. Verify anchor point rating of 5000 lbf minimum.",
+          "contentBlocks": [],
+          "substeps": []
+        },
+        {
+          "id": "s-5-3",
+          "number": "5.3",
+          "instruction": "SO grants entry authorization.",
+          "contentBlocks": [
+            { "type": "sign_off", "role": "SO", "label": "SO authorization signature" },
+            { "type": "field_input", "label": "Time of entry", "inputType": "text" }
+          ],
+          "substeps": []
+        },
+        {
+          "id": "s-5-4",
+          "number": "5.4",
+          "instruction": "Authorized entrant(s) enter chamber.",
+          "contentBlocks": [
+            { "type": "field_input", "label": "AE 1 name", "inputType": "text" },
+            { "type": "field_input", "label": "AE 2 name", "inputType": "text" }
+          ],
+          "substeps": []
+        }
+      ]
+    },
+    {
+      "id": "sec-6",
+      "title": "Exit and Restoration",
+      "steps": [
+        {
+          "id": "s-6-1",
+          "number": "6.1",
+          "instruction": "All personnel exit chamber and confirm headcount.",
+          "contentBlocks": [],
+          "substeps": []
+        },
+        {
+          "id": "s-6-2",
+          "number": "6.2",
+          "instruction": "Remove all personal locks.",
+          "contentBlocks": [],
+          "substeps": []
+        },
+        {
+          "id": "s-6-3",
+          "number": "6.3",
+          "instruction": "Restore chamber control authority to CO.",
+          "contentBlocks": [
+            { "type": "sign_off", "role": "TC", "label": "TC signature" },
+            { "type": "sign_off", "role": "CO", "label": "CO signature" },
+            { "type": "sign_off", "role": "SO", "label": "SO signature" },
+            { "type": "field_input", "label": "Time closeout", "inputType": "text" }
+          ],
+          "substeps": []
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "domain": "safety",
+    "totalSteps": 21,
+    "totalWarnings": 4,
+    "estimatedDuration": "45 minutes"
+  }
+}

@@ -1,0 +1,115 @@
+PROCEDURE: THERMAL VACUUM CHAMBER ENTRY AND SAFETY LOCKOUT
+Document No: SAFE-TVAC-0042
+Revision: D
+Effective Date: 2026-03-03
+
+PURPOSE
+Establish the safety interlock, lockout, and personnel entry sequence for the 6-meter
+thermal vacuum chamber TVAC-A before any personnel access the chamber interior.
+
+SCOPE
+Applies to all personnel accessing the interior of TVAC-A at any time, including during
+test, maintenance, and emergency response.
+
+ROLES
+Safety Officer (SO)
+Chamber Operator (CO)
+Test Conductor (TC)
+Authorized Entrant (AE)
+
+EQUIPMENT
+Oxygen meter, portable, calibrated (Qty: 2)
+Lockout/Tagout kit (Qty: 1)
+Intrinsically safe flashlight (Qty: 1 per entrant)
+Two-way radio (Qty: 1 per entrant)
+Harness and lanyard, fall arrest rated (Qty: 1 per entrant)
+
+1. CHAMBER DEPRESSURIZATION VERIFICATION
+
+  WARNING: Attempting to open the chamber door against residual vacuum can cause the
+  door to swing violently, resulting in severe crushing injury or death. Never bypass
+  the pressure equalization interlock.
+
+  1.1 Confirm chamber pressure equalization valve is OPEN.
+
+  1.2 Verify chamber pressure reading.
+      Chamber pressure: _____ Torr (required: ≥ 750 Torr before door unlock)
+      Pass / Fail: _____
+      CO signature: _____________
+
+  1.3 WARNING: If pressure reading disagrees with ambient by more than 5 Torr,
+      STOP. Do not attempt entry. Contact SO immediately.
+
+2. THERMAL SAFING
+
+  2.1 Verify all shroud zones are at SAFE temperature (between 10 °C and 35 °C).
+      Zone A: _____ °C
+      Zone B: _____ °C
+      Zone C: _____ °C
+      Zone D: _____ °C
+      Pass / Fail: _____
+
+  2.2 CAUTION: Cold surfaces may condense atmospheric moisture when the chamber is
+      opened, creating slip hazards and potential damage to flight hardware.
+
+  2.3 If any zone is outside SAFE range, initiate warm-up and wait until criteria met.
+
+3. ELECTRICAL LOCKOUT
+
+  WARNING: High-voltage feed-throughs remain energized until verified disconnected.
+  Contact with live feed-throughs may result in fatal electrical shock.
+
+  3.1 De-energize all chamber electrical panels at the master disconnect.
+
+  3.2 Apply personal locks to each panel. Each authorized entrant applies their own lock.
+
+    3.2.1 Panel PNL-1 locked by: _____________
+    3.2.2 Panel PNL-2 locked by: _____________
+    3.2.3 Panel PNL-3 locked by: _____________
+
+  3.3 Attempt to energize panels via control interface. Confirm NO activation.
+      Control attempt result: ___ Blocked ___ Activated
+
+  3.4 NOTE: If control attempt shows activation, lockout has failed. Do not enter.
+      Escalate to SO.
+
+4. ATMOSPHERIC VERIFICATION
+
+  4.1 Insert oxygen meter through inspection port.
+
+  4.2 Confirm oxygen concentration is within safe range.
+      O2 reading: _____ % (acceptance: 19.5–23.5%)
+      Pass / Fail: _____
+      SO signature: _____________
+
+  4.3 WARNING: Oxygen concentration outside the acceptance range indicates residual
+      inert gas. Do NOT enter chamber. Ventilate and re-test.
+
+5. ENTRY AUTHORIZATION
+
+  5.1 Confirm radio communication check with external monitor.
+      Radio check: ___ Good ___ Poor
+
+  5.2 Don fall-arrest harness. Verify anchor point rating of 5000 lbf minimum.
+
+  5.3 SO grants entry authorization.
+      SO authorization signature: _____________
+      Time of entry: _____________
+
+  5.4 Authorized entrant(s) enter chamber.
+      AE 1 name: _____________
+      AE 2 name: _____________
+
+6. EXIT AND RESTORATION
+
+  6.1 All personnel exit chamber and confirm headcount.
+
+  6.2 Remove all personal locks.
+
+  6.3 Restore chamber control authority to CO.
+      TC signature: _____________
+      CO signature: _____________
+      SO signature: _____________
+      Time closeout: _____________
+
+ESTIMATED DURATION: 45 minutes
