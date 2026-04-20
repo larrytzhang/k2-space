@@ -2,8 +2,7 @@
 
 **Turn paper aerospace procedures into structured JSON in seconds.**
 
-A working prototype built for [K2 Space](https://www.k2space.com) by Larry Zhang (Harvard).
-Live demo: _<paste your Vercel URL here after first deploy>_
+Live demo: _<vercel-url>_
 
 ---
 
@@ -73,18 +72,6 @@ Visit <http://localhost:3000>.
 
 ---
 
-## Deploy to Vercel
-
-1. Push this repo to GitHub
-2. Import it at <https://vercel.com/new>
-3. Set `ANTHROPIC_API_KEY` in the project's environment variables
-4. Deploy
-
-No other config is needed. Samples work even without an API key — only the
-custom-upload path requires one.
-
----
-
 ## Tests
 
 ```bash
@@ -103,12 +90,3 @@ procedure still satisfies the schema.
 ## Built by
 
 **Larry Zhang** · Harvard · [LinkedIn](https://www.linkedin.com/in/larryzhang225/) · <larryzhang225@gmail.com>
-
-If you're at K2 Space and want to chat, I'd love to — even a 15-minute
-call to learn what problems you'd love to push onto a scrappy generalist.
-
----
-
-## License
-
-[MIT](./LICENSE)
