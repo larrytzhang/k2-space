@@ -9,8 +9,8 @@
 export const AUTHOR = {
   name: "Larry Zhang",
   school: "Harvard",
-  email: "larryzhang225@gmail.com",
-  linkedin: "https://www.linkedin.com/in/larryzhang225/",
+  email: "larry_zhang@college.harvard.edu",
+  linkedin: "https://www.linkedin.com/in/larry-zhang-697636370/",
   github: "https://github.com/larrytzhang/k2-space",
   projectName: "AI Procedure Generator",
   projectTagline:

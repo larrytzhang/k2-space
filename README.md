@@ -89,4 +89,4 @@ procedure still satisfies the schema.
 
 ## Built by
 
-**Larry Zhang** · Harvard · [LinkedIn](https://www.linkedin.com/in/larryzhang225/) · <larryzhang225@gmail.com>
+**Larry Zhang** · Harvard · [LinkedIn](https://www.linkedin.com/in/larry-zhang-697636370/) · <larry_zhang@college.harvard.edu>
