@@ -1,12 +1,19 @@
 /**
  * Client-side API helpers for communicating with the backend.
+ *
+ * Export is performed entirely client-side (see ExportButton) so no helper is
+ * needed for it — the structured procedure is already in memory by the time
+ * the download button is shown.
  */
 
 /**
- * Uploads a procedure document file to the server and returns the job ID.
+ * Upload a procedure document file to the backend and return the job ID.
+ * The caller should then subscribe to /api/jobs/[jobId]/stream for progress.
+ *
  * @param file - The file to upload.
  * @returns The job ID string assigned by the server.
- * @throws Error if the upload request fails.
+ * @throws Error if the upload request fails (the backend error message is
+ *         preserved verbatim so the client translator can surface it).
  */
 export async function uploadFile(file: File): Promise<string> {
   const formData = new FormData();
@@ -27,24 +34,4 @@ export async function uploadFile(file: File): Promise<string> {
 
   const data = (await response.json()) as { jobId: string };
   return data.jobId;
-}
-
-/**
- * Downloads the exported JSON file for a completed procedure job.
- * @param jobId - The job ID to export.
- * @returns A Blob containing the exported JSON.
- * @throws Error if the export request fails.
- */
-export async function exportProcedure(jobId: string): Promise<Blob> {
-  const response = await fetch(`/api/export/${jobId}`);
-
-  if (!response.ok) {
-    const body = await response.json().catch(() => ({}));
-    throw new Error(
-      (body as { error?: string }).error ||
-        `Export failed with status ${response.status}`
-    );
-  }
-
-  return response.blob();
 }
