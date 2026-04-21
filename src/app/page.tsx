@@ -265,7 +265,7 @@ export default function Home() {
 
   return (
     <div className="flex flex-col min-h-full">
-      <main className="flex-1 mx-auto w-full max-w-5xl px-4 py-8 md:py-12">
+      <main className="flex-1 mx-auto w-full max-w-5xl px-6 md:px-10 py-6 md:py-10">
         {state.error && (
           <ErrorToast
             message={friendlyError(state.error)}
@@ -274,29 +274,31 @@ export default function Home() {
         )}
 
         {showLanding && (
-          <div className="space-y-10">
+          <div>
             <HeroSection />
             <SampleProcedures
               onSelect={handleSampleSelected}
               disabled={state.phase === "processing"}
             />
-            <div className="space-y-3">
-              <div className="flex items-baseline justify-between">
-                <h2 className="text-sm font-semibold tracking-wide text-slate-900 uppercase">
+            <section className="py-10 mt-6">
+              <div className="flex items-baseline justify-between border-b border-hairline pb-4">
+                <h2 className="font-serif text-2xl text-ink tracking-tight">
                   Or upload your own
                 </h2>
-                <span className="text-xs text-slate-500">
-                  PDF, DOCX, or TXT · up to 10 MB
+                <span className="hidden sm:block font-mono text-[11px] uppercase tracking-[0.15em] text-ink-subtle">
+                  PDF · DOCX · TXT — up to 10 MB
                 </span>
               </div>
-              <UploadSection
-                file={state.file}
-                onFileSelected={handleFileSelected}
-                onFileRemoved={handleFileRemoved}
-                onProcess={handleProcess}
-                loading={false}
-              />
-            </div>
+              <div className="mt-8">
+                <UploadSection
+                  file={state.file}
+                  onFileSelected={handleFileSelected}
+                  onFileRemoved={handleFileRemoved}
+                  onProcess={handleProcess}
+                  loading={false}
+                />
+              </div>
+            </section>
           </div>
         )}
 

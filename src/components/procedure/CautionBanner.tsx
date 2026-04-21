@@ -1,11 +1,9 @@
 /**
  * CautionBanner renders a medium-severity caution callout for equipment risks.
- * Uses an amber accent to indicate caution.
+ * Amber kept as semantic hue, softened to sit on cream.
  *
  * @param props.text - The caution message text.
  */
-
-import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
 
 interface CautionBannerProps {
   text: string;
@@ -13,11 +11,11 @@ interface CautionBannerProps {
 
 export default function CautionBanner({ text }: CautionBannerProps) {
   return (
-    <div className="flex items-start gap-3 rounded-r-lg bg-amber-50 border-l-4 border-amber-500 p-4">
-      <ExclamationTriangleIcon className="h-5 w-5 text-amber-600 shrink-0 mt-0.5" />
-      <p className="text-sm text-amber-800">
-        <span className="font-bold">CAUTION</span> &mdash; {text}
+    <div className="border-l-2 border-amber-500 bg-amber-50/70 px-4 py-3">
+      <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-amber-700">
+        Caution
       </p>
+      <p className="mt-1 text-sm text-amber-900 leading-relaxed">{text}</p>
     </div>
   );
 }

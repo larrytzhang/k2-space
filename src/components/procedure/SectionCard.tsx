@@ -1,5 +1,6 @@
 /**
  * SectionCard renders a named procedure section containing a list of steps.
+ * Hairline top rule + serif title — no heavy card chrome.
  *
  * @param props.section - The procedure section to render.
  */
@@ -13,13 +14,11 @@ interface SectionCardProps {
 
 export default function SectionCard({ section }: SectionCardProps) {
   return (
-    <section className="rounded-xl border border-slate-200 bg-white shadow-sm overflow-hidden">
-      <div className="border-b border-slate-200 bg-slate-50 px-6 py-4">
-        <h3 className="text-lg font-semibold text-slate-900">
-          {section.title}
-        </h3>
-      </div>
-      <div className="px-6 divide-y divide-slate-100">
+    <section className="border-t border-hairline-strong pt-8">
+      <h3 className="font-serif text-2xl text-ink tracking-tight">
+        {section.title}
+      </h3>
+      <div className="mt-4 divide-y divide-hairline">
         {section.steps.map((step) => (
           <StepCard key={step.id} step={step} />
         ))}

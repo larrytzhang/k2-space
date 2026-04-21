@@ -1,7 +1,7 @@
 "use client";
 
 /**
- * JsonView renders a structured procedure as a syntax-colored JSON block with
+ * JsonView renders a structured procedure as a pretty-printed JSON block with
  * a single "Copy" button in the header. It is the "raw" counterpart to the
  * rendered ProcedureViewer and is intended for reviewers who want to inspect
  * the exact machine-readable output.
@@ -10,10 +10,6 @@
  */
 
 import { useCallback, useState } from "react";
-import {
-  ClipboardDocumentIcon,
-  CheckIcon,
-} from "@heroicons/react/24/outline";
 import type { StructuredProcedure } from "@/lib/types/procedure";
 
 interface JsonViewProps {
@@ -41,31 +37,21 @@ export default function JsonView({ procedure }: JsonViewProps) {
   }, [json]);
 
   return (
-    <div className="rounded-lg border border-slate-200 bg-slate-950 overflow-hidden shadow-sm">
-      <div className="flex items-center justify-between border-b border-slate-800 bg-slate-900 px-4 py-2">
-        <span className="text-xs font-medium text-slate-400 uppercase tracking-wide">
+    <div className="border border-hairline bg-paper">
+      <div className="flex items-center justify-between border-b border-hairline px-5 py-3">
+        <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-ink-subtle">
           Raw JSON · {(json.length / 1024).toFixed(1)} KB
         </span>
         <button
           type="button"
           onClick={handleCopy}
-          className="inline-flex items-center gap-1.5 rounded-md bg-slate-800 px-3 py-1.5 text-xs font-medium text-slate-200 hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-slate-900 transition-colors"
+          className="inline-flex items-center gap-1.5 rounded-sm border border-hairline-strong bg-cream px-3 py-1 text-xs text-ink hover:border-ink hover:bg-paper focus:outline-none focus:ring-2 focus:ring-clay/40 transition-colors"
           aria-live="polite"
         >
-          {copied ? (
-            <>
-              <CheckIcon className="h-3.5 w-3.5" />
-              Copied
-            </>
-          ) : (
-            <>
-              <ClipboardDocumentIcon className="h-3.5 w-3.5" />
-              Copy
-            </>
-          )}
+          {copied ? "Copied" : "Copy"}
         </button>
       </div>
-      <pre className="p-4 text-xs text-slate-100 overflow-x-auto leading-relaxed font-mono max-h-[70vh] overflow-y-auto">
+      <pre className="p-5 text-xs text-ink overflow-x-auto leading-relaxed font-mono max-h-[70vh] overflow-y-auto">
         {json}
       </pre>
     </div>

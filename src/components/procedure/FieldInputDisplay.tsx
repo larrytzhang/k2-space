@@ -19,21 +19,19 @@ export default function FieldInputDisplay({
   unit,
 }: FieldInputDisplayProps) {
   return (
-    <div className="flex items-center gap-3 py-2">
-      <label className="text-sm font-medium text-slate-700 min-w-[120px]">
-        {label}
-      </label>
+    <div className="flex items-center gap-4 py-1.5">
+      <label className="text-sm text-ink min-w-[140px]">{label}</label>
       {inputType === "checkbox" ? (
-        <div className="h-5 w-5 rounded border-2 border-slate-300 bg-white" />
+        <div className="h-4 w-4 border border-ink-subtle bg-paper" />
       ) : (
-        <div className="flex items-center gap-1">
-          <div className="h-9 w-40 rounded-md border border-slate-300 bg-slate-50 px-3 flex items-center">
-            <span className="text-sm text-slate-400">
-              {inputType === "number" ? "0" : "---"}
+        <div className="flex items-baseline gap-2">
+          <div className="h-8 w-44 border-b border-ink-subtle bg-transparent px-2 flex items-center">
+            <span className="font-mono text-sm text-ink-subtle">
+              {inputType === "number" ? "0" : "—"}
             </span>
           </div>
           {unit && (
-            <span className="text-sm text-slate-500 ml-1">{unit}</span>
+            <span className="font-mono text-xs text-ink-muted">{unit}</span>
           )}
         </div>
       )}

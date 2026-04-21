@@ -1,10 +1,46 @@
 @import "tailwindcss";
 
+/*
+ * Design tokens — warm editorial palette, inspired by Anthropic's surfaces.
+ * Colors are exposed as Tailwind utilities (bg-cream, text-ink, border-hairline, …)
+ * via the @theme block so we don't scatter raw hex values through the codebase.
+ */
 @theme {
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --animate-fade-in: fadeIn 0.3s ease-out;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-source-serif), ui-serif, "Iowan Old Style", Georgia, serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --color-cream: #f5f1eb;
+  --color-paper: #faf8f3;
+  --color-ink: #1a1915;
+  --color-ink-muted: #7a7468;
+  --color-ink-subtle: #ada69a;
+  --color-hairline: #e4ded3;
+  --color-hairline-strong: #d1c9b9;
+  --color-clay: #c96342;
+  --color-clay-ink: #a24a2d;
+  --color-clay-soft: #f2e3db;
+
+  --animate-fade-in: fadeIn 0.4s ease-out;
   @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(8px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
+}
+
+html,
+body {
+  background-color: var(--color-cream);
+  color: var(--color-ink);
+}
+
+::selection {
+  background: var(--color-clay);
+  color: var(--color-paper);
 }

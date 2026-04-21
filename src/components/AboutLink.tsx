@@ -10,7 +10,7 @@
  */
 
 import { useCallback, useEffect, useState } from "react";
-import { XMarkIcon, InformationCircleIcon } from "@heroicons/react/24/outline";
+import { XMarkIcon } from "@heroicons/react/24/outline";
 import { AUTHOR } from "@/lib/author";
 
 export default function AboutLink() {
@@ -33,11 +33,10 @@ export default function AboutLink() {
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className="fixed bottom-5 right-5 z-40 inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-700 shadow-sm hover:bg-slate-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 transition-colors"
+        className="fixed bottom-6 right-6 z-40 inline-flex items-center gap-2 border border-hairline bg-paper px-4 py-2 text-sm text-ink-muted hover:text-ink hover:border-ink-subtle focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-clay transition-colors"
         aria-haspopup="dialog"
         aria-expanded={open}
       >
-        <InformationCircleIcon className="h-4 w-4" />
         About this project
       </button>
 
@@ -46,30 +45,34 @@ export default function AboutLink() {
           role="dialog"
           aria-modal="true"
           aria-labelledby="about-title"
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-sm animate-[fadeIn_0.15s_ease-out]"
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-ink/20 backdrop-blur-sm animate-[fadeIn_0.15s_ease-out]"
           onClick={close}
         >
           <div
-            className="relative w-full max-w-lg rounded-xl bg-white p-6 shadow-xl"
+            className="relative w-full max-w-xl bg-paper p-8 md:p-10 border border-hairline"
             onClick={(e) => e.stopPropagation()}
           >
             <button
               type="button"
               onClick={close}
-              className="absolute right-3 top-3 rounded-md p-1 text-slate-400 hover:bg-slate-100 hover:text-slate-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              className="absolute right-3 top-3 rounded-full p-1 text-ink-subtle hover:bg-cream hover:text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-clay"
               aria-label="Close"
             >
               <XMarkIcon className="h-5 w-5" />
             </button>
 
+            <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-ink-subtle">
+              About
+            </p>
+
             <h2
               id="about-title"
-              className="text-lg font-semibold text-slate-900"
+              className="mt-3 font-serif text-3xl text-ink tracking-tight"
             >
               Why I built this
             </h2>
 
-            <div className="mt-3 space-y-3 text-sm text-slate-700 leading-relaxed">
+            <div className="mt-5 space-y-4 text-[15px] text-ink-muted leading-[1.7]">
               <p>
                 I&rsquo;m {AUTHOR.name}, a {AUTHOR.school} student interested
                 in joining a scrappy, growth-minded space startup. I built
@@ -85,13 +88,13 @@ export default function AboutLink() {
                 a sample of how I work: small scope, real output, no
                 hand-waving.
               </p>
-              <p>I&rsquo;d love to chat. Pick whichever is easiest:</p>
+              <p className="text-ink">I&rsquo;d love to chat. Pick whichever is easiest:</p>
             </div>
 
-            <div className="mt-4 flex flex-wrap gap-2">
+            <div className="mt-6 flex flex-wrap gap-3">
               <a
                 href={`mailto:${AUTHOR.email}`}
-                className="inline-flex items-center gap-1.5 rounded-md bg-slate-900 px-3 py-1.5 text-sm font-medium text-white hover:bg-slate-800"
+                className="inline-flex items-center gap-1.5 rounded-sm bg-ink px-4 py-2 text-sm font-medium text-paper hover:bg-clay-ink transition-colors"
               >
                 Email
               </a>
@@ -99,7 +102,7 @@ export default function AboutLink() {
                 href={AUTHOR.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 rounded-md border border-slate-300 bg-white px-3 py-1.5 text-sm font-medium text-slate-700 hover:bg-slate-50"
+                className="inline-flex items-center gap-1.5 rounded-sm border border-hairline-strong bg-paper px-4 py-2 text-sm text-ink hover:border-ink hover:bg-cream transition-colors"
               >
                 LinkedIn
               </a>
@@ -107,7 +110,7 @@ export default function AboutLink() {
                 href={AUTHOR.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 rounded-md border border-slate-300 bg-white px-3 py-1.5 text-sm font-medium text-slate-700 hover:bg-slate-50"
+                className="inline-flex items-center gap-1.5 rounded-sm border border-hairline-strong bg-paper px-4 py-2 text-sm text-ink hover:border-ink hover:bg-cream transition-colors"
               >
                 Source on GitHub
               </a>

@@ -13,15 +13,17 @@ interface SignOffLineProps {
 
 export default function SignOffLine({ role, label }: SignOffLineProps) {
   return (
-    <div className="flex items-end gap-4 py-2">
+    <div className="flex items-end gap-5 py-2">
       <div className="shrink-0">
-        <p className="text-xs text-slate-500 uppercase tracking-wide">
+        <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-ink-subtle">
           {label}
         </p>
-        <p className="text-sm font-semibold text-slate-700">{role}</p>
+        <p className="font-mono text-sm text-ink mt-0.5">{role}</p>
       </div>
-      <div className="flex-1 border-b-2 border-dashed border-slate-300 mb-0.5" />
-      <p className="text-xs text-slate-400 shrink-0">Date: ___/___/___</p>
+      <div className="flex-1 border-b border-dashed border-hairline-strong mb-1" />
+      <p className="font-mono text-xs text-ink-subtle shrink-0">
+        Date ___/___/___
+      </p>
     </div>
   );
 }

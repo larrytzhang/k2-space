@@ -29,7 +29,7 @@ export default function ViewModeToggle({
     <div
       role="tablist"
       aria-label="Procedure view mode"
-      className="inline-flex items-center rounded-lg border border-slate-200 bg-slate-50 p-1 shadow-sm"
+      className="inline-flex items-center gap-6 font-mono text-[11px] uppercase tracking-[0.18em]"
     >
       {OPTIONS.map((opt) => {
         const active = mode === opt.value;
@@ -40,13 +40,17 @@ export default function ViewModeToggle({
             aria-selected={active}
             type="button"
             onClick={() => onChange(opt.value)}
-            className={`rounded-md px-3 py-1.5 text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 ${
-              active
-                ? "bg-white text-slate-900 shadow-sm"
-                : "text-slate-600 hover:text-slate-900"
+            className={`relative pb-1.5 transition-colors focus:outline-none ${
+              active ? "text-ink" : "text-ink-subtle hover:text-ink-muted"
             }`}
           >
             {opt.label}
+            {active && (
+              <span
+                aria-hidden="true"
+                className="absolute left-0 right-0 -bottom-px h-px bg-clay"
+              />
+            )}
           </button>
         );
       })}

@@ -1,11 +1,9 @@
 /**
- * WarningBanner renders a high-severity warning callout for personnel safety hazards.
- * Uses a red accent to indicate danger.
+ * WarningBanner renders a high-severity warning callout for personnel safety
+ * hazards. Red is kept as the semantic hue, but softened to sit on cream.
  *
  * @param props.text - The warning message text.
  */
-
-import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
 
 interface WarningBannerProps {
   text: string;
@@ -13,11 +11,11 @@ interface WarningBannerProps {
 
 export default function WarningBanner({ text }: WarningBannerProps) {
   return (
-    <div className="flex items-start gap-3 rounded-r-lg bg-red-50 border-l-4 border-red-500 p-4">
-      <ExclamationTriangleIcon className="h-5 w-5 text-red-600 shrink-0 mt-0.5" />
-      <p className="text-sm text-red-800">
-        <span className="font-bold">WARNING</span> &mdash; {text}
+    <div className="border-l-2 border-red-600 bg-red-50/70 px-4 py-3">
+      <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-red-700">
+        Warning
       </p>
+      <p className="mt-1 text-sm text-red-900 leading-relaxed">{text}</p>
     </div>
   );
 }

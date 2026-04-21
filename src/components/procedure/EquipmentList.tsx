@@ -8,10 +8,6 @@
  */
 
 import { useState } from "react";
-import {
-  ChevronDownIcon,
-  ChevronUpIcon,
-} from "@heroicons/react/24/outline";
 import type { EquipmentItem } from "@/lib/types/procedure";
 
 interface EquipmentListProps {
@@ -24,46 +20,45 @@ export default function EquipmentList({ equipment }: EquipmentListProps) {
   if (equipment.length === 0) return null;
 
   return (
-    <div className="rounded-lg border border-slate-200 overflow-hidden">
+    <div>
       <button
         type="button"
         onClick={() => setExpanded((prev) => !prev)}
-        className="flex w-full items-center justify-between bg-slate-50 px-4 py-3 text-left hover:bg-slate-100 transition-colors"
+        className="flex w-full items-baseline justify-between text-left group"
       >
-        <h4 className="text-sm font-semibold text-slate-700">
-          Equipment &amp; Materials ({equipment.length})
-        </h4>
-        {expanded ? (
-          <ChevronUpIcon className="h-4 w-4 text-slate-500" />
-        ) : (
-          <ChevronDownIcon className="h-4 w-4 text-slate-500" />
-        )}
+        <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-ink-subtle">
+          Equipment &amp; materials
+          <span className="ml-2 text-ink-muted">({equipment.length})</span>
+        </p>
+        <span className="text-xs text-ink-muted group-hover:text-ink transition-colors">
+          {expanded ? "Hide" : "Show"}
+        </span>
       </button>
 
       {expanded && (
-        <div className="overflow-x-auto">
+        <div className="mt-4 overflow-x-auto border-t border-hairline">
           <table className="w-full text-sm">
             <thead>
-              <tr className="border-b border-slate-200 bg-slate-50/50">
-                <th className="px-4 py-2 text-left font-medium text-slate-600">
+              <tr className="border-b border-hairline">
+                <th className="py-3 pr-4 text-left font-mono text-[11px] uppercase tracking-[0.15em] text-ink-subtle font-normal">
                   Name
                 </th>
-                <th className="px-4 py-2 text-left font-medium text-slate-600">
+                <th className="py-3 pr-4 text-left font-mono text-[11px] uppercase tracking-[0.15em] text-ink-subtle font-normal">
                   Qty
                 </th>
-                <th className="px-4 py-2 text-left font-medium text-slate-600">
+                <th className="py-3 pr-4 text-left font-mono text-[11px] uppercase tracking-[0.15em] text-ink-subtle font-normal">
                   Spec
                 </th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-100">
+            <tbody className="divide-y divide-hairline">
               {equipment.map((item, idx) => (
-                <tr key={idx} className="hover:bg-slate-50">
-                  <td className="px-4 py-2 text-slate-700">{item.name}</td>
-                  <td className="px-4 py-2 text-slate-500">
+                <tr key={idx}>
+                  <td className="py-3 pr-4 text-ink">{item.name}</td>
+                  <td className="py-3 pr-4 font-mono text-xs text-ink-muted tabular-nums">
                     {item.quantity || "—"}
                   </td>
-                  <td className="px-4 py-2 text-slate-500">
+                  <td className="py-3 pr-4 text-ink-muted">
                     {item.specification || "—"}
                   </td>
                 </tr>

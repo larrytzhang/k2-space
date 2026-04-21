@@ -14,11 +14,6 @@
  * @param props.progress - Progress percentage from 0 to 100.
  */
 
-import {
-  CheckCircleIcon,
-  ArrowPathIcon,
-} from "@heroicons/react/24/solid";
-
 interface ProcessingIndicatorProps {
   stage: string;
   progress: number;
@@ -67,61 +62,62 @@ export default function ProcessingIndicator({
   const stageStates = deriveStageStates(clamped);
 
   return (
-    <div className="mx-auto flex max-w-xl flex-col items-start gap-6 py-12 animate-[fadeIn_0.3s_ease-out]">
+    <div className="mx-auto flex max-w-xl flex-col items-start gap-10 py-16 md:py-24 animate-[fadeIn_0.4s_ease-out]">
       <div className="w-full">
-        <p className="text-xs font-semibold tracking-wide text-slate-500 uppercase">
+        <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-ink-subtle">
           Processing
         </p>
-        <p className="mt-1 text-lg font-semibold text-slate-900">
+        <p className="mt-3 font-serif text-2xl text-ink tracking-tight">
           {stage || "Preparing document"}
         </p>
       </div>
 
       <div className="w-full">
-        <div className="h-1.5 w-full rounded-full bg-slate-100 overflow-hidden">
+        <div className="h-px w-full bg-hairline overflow-hidden">
           <div
-            className="h-full rounded-full bg-slate-900 transition-all duration-500 ease-out"
+            className="h-full bg-ink transition-all duration-500 ease-out"
             style={{ width: `${clamped}%` }}
           />
         </div>
-        <p className="mt-2 text-xs text-slate-500">
-          {Math.round(clamped)}% · typically completes in 8–12 seconds
+        <p className="mt-3 font-mono text-xs text-ink-subtle tabular-nums">
+          {String(Math.round(clamped)).padStart(2, "0")}%  ·  typically 8–12s
         </p>
       </div>
 
-      <ul className="w-full space-y-3">
+      <ol className="w-full">
         {STAGES.map((s, i) => {
           const state = stageStates[i];
           return (
             <li
               key={s.label}
-              className="flex items-center gap-3 text-sm"
+              className="grid grid-cols-[2.5rem_1fr] items-baseline gap-4 py-3 border-t border-hairline first:border-t-0"
               aria-current={state === "active" ? "step" : undefined}
             >
-              {state === "done" && (
-                <CheckCircleIcon className="h-5 w-5 text-emerald-500 shrink-0" />
-              )}
-              {state === "active" && (
-                <ArrowPathIcon className="h-5 w-5 text-slate-700 animate-spin shrink-0" />
-              )}
-              {state === "pending" && (
-                <span className="h-5 w-5 rounded-full border-2 border-slate-200 shrink-0" />
-              )}
               <span
-                className={
+                className={`font-mono text-xs tabular-nums ${
+                  state === "pending" ? "text-ink-subtle" : "text-ink-muted"
+                }`}
+              >
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <span
+                className={`text-[15px] ${
                   state === "pending"
-                    ? "text-slate-400"
+                    ? "text-ink-subtle"
                     : state === "done"
-                      ? "text-slate-500 line-through decoration-slate-300"
-                      : "text-slate-900 font-medium"
-                }
+                      ? "text-ink-muted"
+                      : "text-ink font-medium"
+                }`}
               >
                 {s.label}
+                {state === "active" && (
+                  <span className="ml-2 inline-block h-1.5 w-1.5 rounded-full bg-clay align-middle animate-pulse" />
+                )}
               </span>
             </li>
           );
         })}
-      </ul>
+      </ol>
     </div>
   );
 }

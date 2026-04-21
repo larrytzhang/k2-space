@@ -35,15 +35,15 @@ export default function ProcedureResult({
   const [mode, setMode] = useState<ProcedureViewMode>("rendered");
 
   return (
-    <div className="space-y-6 animate-[fadeIn_0.3s_ease-out]">
-      <div className="flex flex-col-reverse gap-3 sm:flex-row sm:items-center sm:justify-between">
+    <div className="py-10 space-y-10 animate-[fadeIn_0.4s_ease-out]">
+      <div className="flex flex-col-reverse gap-4 sm:flex-row sm:items-center sm:justify-between border-b border-hairline pb-6">
         <ViewModeToggle mode={mode} onChange={setMode} />
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-3">
           <ExportButton procedure={procedure} />
           <button
             type="button"
             onClick={onReset}
-            className="inline-flex items-center gap-2 rounded-lg border border-slate-300 bg-white px-5 py-2.5 text-sm font-medium text-slate-700 shadow-sm hover:bg-slate-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 transition-colors"
+            className="inline-flex items-center gap-2 rounded-sm border border-hairline-strong bg-paper px-5 py-2.5 text-sm text-ink hover:border-ink hover:bg-cream focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-clay transition-colors"
           >
             Process another
           </button>

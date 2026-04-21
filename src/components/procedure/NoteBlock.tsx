@@ -1,11 +1,9 @@
 /**
- * NoteBlock renders a low-severity informational annotation.
- * Uses a blue accent to indicate general information.
+ * NoteBlock renders a low-severity informational annotation — treated as a
+ * quiet editorial aside in ink tones rather than a colored callout.
  *
  * @param props.text - The note message text.
  */
-
-import { InformationCircleIcon } from "@heroicons/react/24/outline";
 
 interface NoteBlockProps {
   text: string;
@@ -13,11 +11,11 @@ interface NoteBlockProps {
 
 export default function NoteBlock({ text }: NoteBlockProps) {
   return (
-    <div className="flex items-start gap-3 rounded-r-lg bg-blue-50 border-l-4 border-blue-500 p-4">
-      <InformationCircleIcon className="h-5 w-5 text-blue-600 shrink-0 mt-0.5" />
-      <p className="text-sm text-blue-800">
-        <span className="font-bold">NOTE</span> &mdash; {text}
+    <div className="border-l-2 border-hairline-strong bg-paper/60 px-4 py-3">
+      <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-ink-subtle">
+        Note
       </p>
+      <p className="mt-1 text-sm text-ink-muted leading-relaxed">{text}</p>
     </div>
   );
 }

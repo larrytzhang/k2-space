@@ -1,6 +1,6 @@
 /**
- * ProcedureStats renders a row of summary badges for the procedure metadata.
- * Displays step count, warning count, and estimated duration.
+ * ProcedureStats renders summary metadata as a restrained keyline row —
+ * number + label pairs separated by hairlines, no pill chrome.
  *
  * @param props.metadata - The procedure metadata object.
  */
@@ -13,36 +13,29 @@ interface ProcedureStatsProps {
 
 export default function ProcedureStats({ metadata }: ProcedureStatsProps) {
   const stats: { label: string; value: string }[] = [
-    {
-      label: "Steps",
-      value: String(metadata.totalSteps),
-    },
-    {
-      label: "Warnings",
-      value: String(metadata.totalWarnings),
-    },
+    { label: "Steps", value: String(metadata.totalSteps) },
+    { label: "Warnings", value: String(metadata.totalWarnings) },
   ];
 
   if (metadata.estimatedDuration) {
-    stats.push({
-      label: "Duration",
-      value: metadata.estimatedDuration,
-    });
+    stats.push({ label: "Duration", value: metadata.estimatedDuration });
   }
 
   return (
-    <div className="flex flex-wrap gap-3">
+    <dl className="mt-8 grid grid-cols-2 sm:grid-cols-3 border-t border-hairline">
       {stats.map((stat) => (
         <div
           key={stat.label}
-          className="inline-flex items-center gap-2 rounded-lg bg-slate-100 px-4 py-2"
+          className="border-b border-hairline border-r last:border-r-0 sm:border-b-0 py-5 pr-6"
         >
-          <span className="text-sm font-semibold text-slate-900">
+          <dt className="font-mono text-[11px] uppercase tracking-[0.18em] text-ink-subtle">
+            {stat.label}
+          </dt>
+          <dd className="mt-2 font-serif text-3xl text-ink tabular-nums">
             {stat.value}
-          </span>
-          <span className="text-sm text-slate-500">{stat.label}</span>
+          </dd>
         </div>
       ))}
-    </div>
+    </dl>
   );
 }

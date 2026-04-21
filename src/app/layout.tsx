@@ -1,10 +1,31 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Source_Serif_4, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
+/*
+ * Three typefaces, each with a clear job:
+ *   - Inter         → UI + body copy
+ *   - Source Serif 4 → editorial display (headlines, serif pulls)
+ *   - JetBrains Mono → step numbers, document codes, raw JSON
+ * Each is exposed as a CSS variable and wired into Tailwind via globals.css.
+ */
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
+  display: "swap",
+});
+
+const sourceSerif = Source_Serif_4({
+  variable: "--font-source-serif",
+  subsets: ["latin"],
+  display: "swap",
+  style: ["normal", "italic"],
+});
+
+const jetBrainsMono = JetBrains_Mono({
+  variable: "--font-jetbrains",
+  subsets: ["latin"],
+  display: "swap",
 });
 
 /**
@@ -49,7 +70,7 @@ export const metadata: Metadata = {
 
 /**
  * Root layout component for the Procedure AI application.
- * Applies the Inter font and sets up the base HTML structure.
+ * Applies the three-font stack and sets the warm cream canvas.
  */
 export default function RootLayout({
   children,
@@ -57,8 +78,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col font-sans bg-slate-50 text-slate-900">
+    <html
+      lang="en"
+      className={`${inter.variable} ${sourceSerif.variable} ${jetBrainsMono.variable} h-full antialiased`}
+    >
+      <body className="min-h-full flex flex-col font-sans bg-cream text-ink">
         {children}
       </body>
     </html>

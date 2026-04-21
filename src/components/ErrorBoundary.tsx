@@ -11,7 +11,6 @@
  */
 
 import { Component, type ReactNode } from "react";
-import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
 
 interface ErrorBoundaryProps {
   onReset: () => void;
@@ -57,20 +56,21 @@ export default class ErrorBoundary extends Component<
       return (
         <div
           role="alert"
-          className="mx-auto max-w-xl rounded-xl border border-amber-200 bg-amber-50 p-6 text-center"
+          className="mx-auto max-w-xl border border-hairline bg-paper p-8"
         >
-          <ExclamationTriangleIcon className="mx-auto h-8 w-8 text-amber-500" />
-          <h2 className="mt-3 text-base font-semibold text-slate-900">
+          <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-clay-ink">
+            Render error
+          </p>
+          <h2 className="mt-3 font-serif text-2xl text-ink tracking-tight">
             Something went wrong rendering this procedure.
           </h2>
-          <p className="mt-1 text-sm text-slate-600">
-            {this.state.message ??
-              "The result could not be displayed."}
+          <p className="mt-3 text-sm text-ink-muted leading-relaxed">
+            {this.state.message ?? "The result could not be displayed."}
           </p>
           <button
             type="button"
             onClick={this.handleReset}
-            className="mt-4 inline-flex items-center gap-2 rounded-lg bg-slate-900 px-4 py-2 text-sm font-medium text-white hover:bg-slate-800"
+            className="mt-6 inline-flex items-center gap-2 rounded-sm bg-ink px-4 py-2 text-sm text-paper hover:bg-clay-ink transition-colors"
           >
             Start over
           </button>

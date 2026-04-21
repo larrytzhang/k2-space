@@ -1,5 +1,6 @@
 /**
- * RolesBar displays a horizontal row of role chips showing abbreviation and full name.
+ * RolesBar displays a compact definition list of personnel roles.
+ * Rendered as plain text with a monospace abbreviation column — no pills.
  *
  * @param props.roles - Array of Role objects to display.
  */
@@ -15,19 +16,22 @@ export default function RolesBar({ roles }: RolesBarProps) {
 
   return (
     <div>
-      <h4 className="text-sm font-semibold text-slate-700 mb-2">Roles</h4>
-      <div className="flex flex-wrap gap-2">
+      <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-ink-subtle">
+        Roles
+      </p>
+      <dl className="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-2">
         {roles.map((role) => (
-          <span
+          <div
             key={role.abbreviation}
-            className="inline-flex items-center gap-1.5 rounded-full bg-slate-100 px-3 py-1.5 text-sm text-slate-700 ring-1 ring-inset ring-slate-200"
+            className="flex items-baseline gap-3 text-sm"
           >
-            <span className="font-semibold">{role.abbreviation}</span>
-            <span className="text-slate-400">&mdash;</span>
-            <span>{role.fullName}</span>
-          </span>
+            <dt className="font-mono text-xs text-ink w-12 shrink-0">
+              {role.abbreviation}
+            </dt>
+            <dd className="text-ink-muted">{role.fullName}</dd>
+          </div>
         ))}
-      </div>
+      </dl>
     </div>
   );
 }

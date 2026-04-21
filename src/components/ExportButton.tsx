@@ -10,7 +10,6 @@
  */
 
 import { useCallback, useState } from "react";
-import { ArrowDownTrayIcon, CheckIcon } from "@heroicons/react/24/outline";
 import type { StructuredProcedure } from "@/lib/types/procedure";
 
 interface ExportButtonProps {
@@ -55,20 +54,13 @@ export default function ExportButton({ procedure }: ExportButtonProps) {
     <button
       type="button"
       onClick={handleDownload}
-      className="inline-flex items-center gap-2 rounded-lg bg-slate-900 px-5 py-2.5 text-sm font-medium text-white shadow-sm hover:bg-slate-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 transition-colors"
+      className="inline-flex items-center gap-2 rounded-sm bg-ink px-5 py-2.5 text-sm text-paper hover:bg-clay-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-clay transition-colors"
       aria-live="polite"
     >
-      {justSaved ? (
-        <>
-          <CheckIcon className="h-4 w-4" />
-          Downloaded
-        </>
-      ) : (
-        <>
-          <ArrowDownTrayIcon className="h-4 w-4" />
-          Download JSON
-        </>
-      )}
+      {justSaved ? "Downloaded" : "Download JSON"}
+      <span aria-hidden="true" className="text-paper/60">
+        ↓
+      </span>
     </button>
   );
 }

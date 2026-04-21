@@ -17,18 +17,20 @@ interface SubstepRowProps {
 export default function SubstepRow({ step, depth = 1 }: SubstepRowProps) {
   return (
     <div
-      className="border-l-2 border-slate-200 py-2"
-      style={{ marginLeft: `${depth * 1.5}rem`, paddingLeft: "1rem" }}
+      className="border-l border-hairline py-2"
+      style={{ marginLeft: `${depth * 1.25}rem`, paddingLeft: "1rem" }}
     >
-      <div className="flex items-baseline gap-2">
-        <span className="text-xs font-mono text-slate-500 shrink-0">
+      <div className="flex items-baseline gap-3">
+        <span className="text-xs font-mono text-ink-subtle shrink-0 tabular-nums">
           {step.number}
         </span>
-        <p className="text-sm text-slate-700">{step.instruction}</p>
+        <p className="text-sm text-ink-muted leading-relaxed">
+          {step.instruction}
+        </p>
       </div>
 
       {step.contentBlocks.length > 0 && (
-        <div className="mt-2 flex flex-col gap-2 ml-6">
+        <div className="mt-2 flex flex-col gap-2 ml-8">
           {step.contentBlocks.map((block, idx) => (
             <ContentBlockRenderer key={idx} block={block} />
           ))}

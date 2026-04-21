@@ -1,10 +1,9 @@
 /**
- * PassFailCriteria renders a pass/fail acceptance criterion with a green accent.
+ * PassFailCriteria renders a pass/fail acceptance criterion.
+ * Green hue preserved for semantics, softened for the cream canvas.
  *
  * @param props.criteria - The acceptance criteria text.
  */
-
-import { CheckBadgeIcon } from "@heroicons/react/24/outline";
 
 interface PassFailCriteriaProps {
   criteria: string;
@@ -12,9 +11,11 @@ interface PassFailCriteriaProps {
 
 export default function PassFailCriteria({ criteria }: PassFailCriteriaProps) {
   return (
-    <div className="flex items-start gap-3 rounded-lg bg-green-50 border border-green-200 p-3">
-      <CheckBadgeIcon className="h-5 w-5 text-green-600 shrink-0 mt-0.5" />
-      <p className="text-sm text-green-800">{criteria}</p>
+    <div className="border-l-2 border-emerald-600 bg-emerald-50/60 px-4 py-3">
+      <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-emerald-700">
+        Pass / fail
+      </p>
+      <p className="mt-1 text-sm text-emerald-900 leading-relaxed">{criteria}</p>
     </div>
   );
 }

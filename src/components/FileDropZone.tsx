@@ -2,14 +2,15 @@
 
 /**
  * FileDropZone provides a drag-and-drop area for uploading procedure documents.
- * Also supports clicking to browse for files via a hidden input.
+ * Also supports clicking to browse for files via a hidden input. Styled as a
+ * quiet, thin-dashed surface on the cream canvas — intentionally understated
+ * so it recedes next to the sample list above it.
  *
  * @param props.onFileSelected - Callback invoked with the selected File.
  * @param props.disabled - When true, the drop zone is visually and functionally disabled.
  */
 
 import { useCallback, useRef, useState } from "react";
-import { DocumentTextIcon } from "@heroicons/react/24/outline";
 import { ACCEPTED_EXTENSIONS } from "@/lib/constants";
 
 interface FileDropZoneProps {
@@ -73,21 +74,26 @@ export default function FileDropZone({
       onDragLeave={handleDragLeave}
       onClick={() => !disabled && inputRef.current?.click()}
       className={`
-        relative flex flex-col items-center justify-center gap-3 rounded-xl border-2 border-dashed p-10 transition-colors cursor-pointer
-        ${isDragging ? "border-indigo-500 bg-indigo-50" : "border-slate-300 bg-slate-50 hover:border-slate-400 hover:bg-slate-100"}
+        relative flex flex-col items-center justify-center gap-3 rounded-sm border border-dashed px-6 py-14 transition-colors cursor-pointer
+        ${
+          isDragging
+            ? "border-clay bg-clay-soft/60"
+            : "border-hairline-strong bg-paper/50 hover:border-ink-subtle hover:bg-paper"
+        }
         ${disabled ? "opacity-50 cursor-not-allowed" : ""}
       `}
       role="button"
       tabIndex={0}
       aria-label="Upload procedure document"
     >
-      <DocumentTextIcon className="h-10 w-10 text-slate-400" />
-      <p className="text-slate-700 font-medium">
-        Drop your procedure document here, or{" "}
-        <span className="text-indigo-600 underline">click to browse</span>
+      <p className="text-[15px] text-ink">
+        Drop a procedure document, or{" "}
+        <span className="text-clay-ink underline underline-offset-4 decoration-clay/40">
+          click to browse
+        </span>
       </p>
-      <p className="text-sm text-slate-500">
-        PDF, Word (.docx), or plain text up to 10MB
+      <p className="font-mono text-[11px] uppercase tracking-[0.15em] text-ink-subtle">
+        PDF · DOCX · TXT — up to 10 MB
       </p>
       <input
         ref={inputRef}

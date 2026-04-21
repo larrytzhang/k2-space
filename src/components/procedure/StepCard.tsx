@@ -1,6 +1,7 @@
 /**
- * StepCard renders a single top-level procedure step with a numbered circle badge,
- * the instruction text, any attached content blocks, and nested substeps.
+ * StepCard renders a single top-level procedure step with a monospaced step
+ * number, the instruction text, any attached content blocks, and nested
+ * substeps. No badge, no chrome — just typographic hierarchy.
  *
  * @param props.step - The procedure step to render.
  */
@@ -15,20 +16,20 @@ interface StepCardProps {
 
 export default function StepCard({ step }: StepCardProps) {
   return (
-    <div className="flex gap-4 py-4">
-      {/* Number badge */}
-      <div className="shrink-0">
-        <div className="flex h-8 w-8 items-center justify-center rounded-full bg-indigo-600 text-white text-sm font-bold">
-          {step.number}
-        </div>
-      </div>
+    <div className="grid grid-cols-[4rem_1fr] gap-6 py-5">
+      {/* Monospace step number */}
+      <span className="font-mono text-sm text-ink-muted tabular-nums pt-0.5">
+        {step.number}
+      </span>
 
       {/* Content */}
-      <div className="flex-1 min-w-0">
-        <p className="text-slate-800 leading-relaxed">{step.instruction}</p>
+      <div className="min-w-0">
+        <p className="text-[15.5px] text-ink leading-[1.7]">
+          {step.instruction}
+        </p>
 
         {step.contentBlocks.length > 0 && (
-          <div className="mt-3 flex flex-col gap-2">
+          <div className="mt-4 flex flex-col gap-2.5">
             {step.contentBlocks.map((block, idx) => (
               <ContentBlockRenderer key={idx} block={block} />
             ))}
@@ -36,7 +37,7 @@ export default function StepCard({ step }: StepCardProps) {
         )}
 
         {step.substeps.length > 0 && (
-          <div className="mt-2">
+          <div className="mt-3">
             {step.substeps.map((substep) => (
               <SubstepRow key={substep.id} step={substep} />
             ))}
